@@ -84,6 +84,12 @@ void Encrypt(char file[][100], int number, int a) {
 	}
 }
 
+void FullFile(FILE* file2, char file[][100], int a) {
+	for (int i = 0; i < a; i++) {
+		fprintf(file2, file[i]);
+	}
+}
+
 int main() {
 	//завдання 1
 
@@ -220,8 +226,10 @@ int main() {
 	cout << "Enter a number to encrypt"; cin >> number;
 	char file[100][100];
 	int a = NumLine(file1);
+
 	FullMasive(file1, file);
 	Encrypt(file, number, a);
+	FullFile(file2, file, a);
 
 	fclose(file1);
 	fclose(file2); 
