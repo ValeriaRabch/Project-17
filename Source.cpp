@@ -3,6 +3,26 @@
 #include<iostream>
 using namespace std;
 
+int NumberOfCharacters(FILE* file1, int select) {
+	int count1 = 0, count2 = 0; char a = getc(file1);
+	while (a != EOF) {
+		if (a != '\n') {
+			count1++;
+		}
+		else {
+			count2++;
+		}
+		a = getc(file1);
+	}
+	fseek(file1, 0, SEEK_SET);
+	if (select == 1) {
+		return count1;
+	}
+	if (select == 2) {
+		return count2;
+	}
+}
+
 int main() {
 	//завдання 1
 
@@ -96,6 +116,20 @@ int main() {
 	FILE* file1, * file2;
 	file1 = fopen("D:\\Valeria\\file.txt", "r");
 	file2 = fopen("D:\\Valeria\\file2.txt", "w");
+
+	int select = -1, b;
+	while (select != 6) {
+		cout << "Select\n1 - number of characters\n2 - number of lines\n3 - number of vowels\n4 - number of consonsns\n5 - number of numbers\n6 - leave\n"; cin >> select;
+		if (select == 1) {
+			fprintf(file2, "Number of characters - ");
+			fprintf(file2, "%i", NumberOfCharacters(file1, select));
+			fprintf(file2, "\n");
+		}
+		if (select == 2) {
+			fprintf(file2, "Number of lines - ");
+			fprintf(file2, "%i", NumberOfCharacters(file1, select));
+			fprintf(file2, "\n");
+		}
 
 	fclose(file1);
 	fclose(file2);
