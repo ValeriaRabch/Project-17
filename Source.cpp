@@ -23,6 +23,26 @@ int NumberOfCharacters(FILE* file1, int select) {
 	}
 }
 
+int NumberOfVowels(FILE* file1, int select) {
+	int count = 0, b = 0; char a = getc(file1);
+	while (a != EOF) {
+		if (a == 'a' || a == 'e' || a == 'i' || a == 'o' || a == 'u' || a == 'y') {
+			count++;
+		}
+		if (a >= 'A' && a <= 'Z' || a >= 'a' && a <= 'z') {
+			b++;
+		}
+		a = getc(file1);
+	}
+	fseek(file1, 0, SEEK_SET);
+	if (select == 3) {
+		return count;
+	}
+	if (select == 4) {
+		return b - count;
+	}
+}
+
 int main() {
 	//завдання 1
 
@@ -128,6 +148,16 @@ int main() {
 		if (select == 2) {
 			fprintf(file2, "Number of lines - ");
 			fprintf(file2, "%i", NumberOfCharacters(file1, select));
+			fprintf(file2, "\n");
+		}
+		if (select == 3) {
+			fprintf(file2, "Number of vowels - ");
+			fprintf(file2, "%i", NumberOfVowels(file1, select));
+			fprintf(file2, "\n");
+		}
+		if (select == 4) {
+			fprintf(file2, "Number of consonsns - ");
+			fprintf(file2, "%i", NumberOfVowels(file1, select));
 			fprintf(file2, "\n");
 		}
 
