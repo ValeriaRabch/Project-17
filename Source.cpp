@@ -43,6 +43,18 @@ int NumberOfVowels(FILE* file1, int select) {
 	}
 }
 
+int NumberOfNumber(FILE* file1) {
+	int count = 0; char a = getc(file1);
+	while (a != EOF) {
+		if (a >= '1' && a <= '9') {
+			count++;
+		}
+		a = getc(file1);
+	}
+	fseek(file1, 0, SEEK_SET);
+	return count;
+}
+
 int main() {
 	//завдання 1
 
@@ -160,6 +172,12 @@ int main() {
 			fprintf(file2, "%i", NumberOfVowels(file1, select));
 			fprintf(file2, "\n");
 		}
+		if (select == 5) {
+			fprintf(file2, "Number of numbers - ");
+			fprintf(file2, "%i", NumberOfNumber(file1));
+			fprintf(file2, "\n");
+		}
+	}
 
 	fclose(file1);
 	fclose(file2);
