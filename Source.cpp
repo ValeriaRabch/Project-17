@@ -55,6 +55,35 @@ int NumberOfNumber(FILE* file1) {
 	return count;
 }
 
+int NumLine(FILE* file) {
+	char a = getc(file);
+	int count = 0;
+	while (a != EOF) {
+		if (a == '\n') {
+			count++;
+		}
+		a = getc(file);
+	}
+	fseek(file, 0, SEEK_SET);
+	return count;
+}
+
+void  FullMasive(FILE* file1, char file[][100]) {
+	int a = NumLine(file1);
+	for (int i = 0; i < a; i++) {
+		fgets(file[i], 100, file1);
+	}
+	fseek(file1, 0, SEEK_SET);
+}
+
+void Encrypt(char file[][100], int number, int a) {
+	for (int i = 0; i < a; i++) {
+		for (int j = 0; file[i][j] != '\n'; j++) {
+			file[i][j] += number;
+		}
+	}
+}
+
 int main() {
 	//завдання 1
 
@@ -182,5 +211,19 @@ int main() {
 	fclose(file1);
 	fclose(file2);*/
 
+	//завдання 3
+	FILE* file1, * file2;
+	file1 = fopen("D:\\Valeria\\file.txt", "r");
+	file2 = fopen("D:\\Valeria\\file2.txt", "w");
+
+	int number;
+	cout << "Enter a number to encrypt"; cin >> number;
+	char file[100][100];
+	int a = NumLine(file1);
+	FullMasive(file1, file);
+	Encrypt(file, number, a);
+
+	fclose(file1);
+	fclose(file2); 
 	return 0;
 }
